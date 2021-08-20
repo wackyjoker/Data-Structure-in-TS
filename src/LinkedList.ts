@@ -4,8 +4,8 @@ export class Node<T> {
 }
 
 interface ILinkedList<T> {
-	append(data: T): Node<T>
-	prepend(data: T): Node<T>
+	append(data: T): this
+	prepend(data: T): this
 }
 
 class LinkedList<T> implements ILinkedList<T> {
@@ -20,13 +20,13 @@ class LinkedList<T> implements ILinkedList<T> {
 			this.head = newNode
 			this.tail = this.head
 			this.length++
-			return newNode
+			return this
 		}
 
 		this.tail.next = newNode
 		this.tail = newNode
 		this.length++
-		return newNode
+		return this
 	}
 	public prepend(data: T) {
 		const newNode = new Node(data)
@@ -34,13 +34,12 @@ class LinkedList<T> implements ILinkedList<T> {
 			this.head = newNode
 			this.tail = this.head
 			this.length++
-			return newNode
+			return this
 		}
-		const temp = this.head
+		newNode.next = this.head
 		this.head = newNode
-		this.head.next = temp
 		this.length++
-		return newNode
+		return this
 	}
 }
 
@@ -49,5 +48,5 @@ const linkedList = new LinkedList()
 linkedList.append(2)
 linkedList.append(3)
 linkedList.prepend(1)
-linkedList.prepend(0)
+linkedList.append(5)
 console.log(linkedList)
