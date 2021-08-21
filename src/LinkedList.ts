@@ -7,7 +7,7 @@ interface ILinkedList<T> {
 	append(data: T): this
 	prepend(data: T): this
 	printList(): Array<T>
-	traverse(index: number): Node<T>
+	traverseToIndex(index: number): Node<T>
 	insert(index: number, data: T): this
 	delete(index: number): this
 }
@@ -54,7 +54,7 @@ class LinkedList<T> implements ILinkedList<T> {
 		}
 		return array
 	}
-	public traverse(index: number) {
+	public traverseToIndex(index: number) {
 		let currentNode = this.head
 		if (!currentNode) return null
 		for (let i = 0; i < index; i++) {
@@ -68,7 +68,7 @@ class LinkedList<T> implements ILinkedList<T> {
 			return this.append(data)
 		}
 		const newNode = new Node(data)
-		const current = this.traverse(index)
+		const current = this.traverseToIndex(index)
 		const temp = current.next
 		current.next = newNode
 		newNode.next = temp
@@ -76,9 +76,9 @@ class LinkedList<T> implements ILinkedList<T> {
 		return this
 	}
 	public delete(index: number) {
-		const current = this.traverse(index - 1)
-		const temp = current.next
-		current.next = temp.next
+		const current = this.traverseToIndex(index - 1)
+		const toBeDeleted = current.next
+		current.next = toBeDeleted.next
 		this.length--
 		return this
 	}
@@ -92,7 +92,7 @@ linkedList.prepend(1)
 linkedList.append(5)
 console.log(linkedList)
 console.log(linkedList.printList())
-console.log(linkedList.traverse(2))
+console.log(linkedList.traverseToIndex(2))
 linkedList.insert(2, 4)
 linkedList.insert(200, 6)
 console.log(linkedList)
