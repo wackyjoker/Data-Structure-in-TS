@@ -9,6 +9,7 @@ interface ILinkedList<T> {
 	printList(): Array<T>
 	traverse(index: number): Node<T>
 	insert(index: number, data: T): this
+	delete(index: number): this
 }
 
 class LinkedList<T> implements ILinkedList<T> {
@@ -63,12 +64,22 @@ class LinkedList<T> implements ILinkedList<T> {
 	}
 
 	public insert(index: number, data: T) {
+		if (index >= this.length) {
+			return this.append(data)
+		}
 		const newNode = new Node(data)
-		const head = this.traverse(index)
-		const temp = head.next
-		head.next = newNode
+		const current = this.traverse(index)
+		const temp = current.next
+		current.next = newNode
 		newNode.next = temp
 		this.length++
+		return this
+	}
+	public delete(index: number) {
+		const current = this.traverse(index - 1)
+		const temp = current.next
+		current.next = temp.next
+		this.length--
 		return this
 	}
 }
@@ -83,5 +94,9 @@ console.log(linkedList)
 console.log(linkedList.printList())
 console.log(linkedList.traverse(2))
 linkedList.insert(2, 4)
+linkedList.insert(200, 6)
+console.log(linkedList)
+console.log(linkedList.printList())
+linkedList.delete(1)
 console.log(linkedList)
 console.log(linkedList.printList())
