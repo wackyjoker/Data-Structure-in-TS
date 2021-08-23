@@ -10,6 +10,7 @@ interface ILinkedList<T> {
 	traverseToIndex(index: number): Node<T>
 	insert(index: number, data: T): this
 	delete(index: number): this
+	reverse(): this
 }
 
 class LinkedList<T> implements ILinkedList<T> {
@@ -69,9 +70,9 @@ class LinkedList<T> implements ILinkedList<T> {
 		}
 		const newNode = new Node(data)
 		const current = this.traverseToIndex(index)
-		const temp = current.next
+		const tempMemory = current.next
 		current.next = newNode
-		newNode.next = temp
+		newNode.next = tempMemory
 		this.length++
 		return this
 	}
@@ -80,6 +81,26 @@ class LinkedList<T> implements ILinkedList<T> {
 		const toBeDeleted = current.next
 		current.next = toBeDeleted.next
 		this.length--
+		return this
+	}
+	public reverse() {
+		if (this.length < 2) {
+			return this
+		}
+		let leader = this.head.next
+		let temp = leader.next
+		this.tail = this.head
+		this.tail.next = null
+
+		while (leader.next) {
+			leader.next = this.head
+			this.head = leader
+			leader = temp
+			temp = leader.next
+		}
+		leader.next = this.head
+		this.head = leader
+
 		return this
 	}
 }
@@ -98,5 +119,9 @@ linkedList.insert(200, 6)
 console.log(linkedList)
 console.log(linkedList.printList())
 linkedList.delete(1)
-console.log(linkedList)
+console.log(linkedList.printList())
+
+console.log("---------")
+
+linkedList.reverse()
 console.log(linkedList.printList())

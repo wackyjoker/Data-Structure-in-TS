@@ -71,9 +71,11 @@ class LinkedList<T> implements ILinkedList<T> {
 		}
 		const newNode = new Node(data)
 		const current = this.traverseToIndex(index)
-		const temp = current.next
+		const tempMemory = current.next
+
 		current.next = newNode
-		newNode.next = temp
+		newNode.prev = current
+		newNode.next = tempMemory
 		this.length++
 		return this
 	}
@@ -92,12 +94,11 @@ linkedList.append(2)
 linkedList.append(3)
 linkedList.append(5)
 linkedList.prepend(1)
-
+linkedList.insert(2, 4)
 console.log(linkedList)
 console.log(linkedList.printList())
-console.log(linkedList.head.next)
 // console.log(linkedList.traverseToIndex(2))
-// linkedList.insert(2, 4)
+
 // linkedList.insert(200, 6)
 // console.log(linkedList)
 // console.log(linkedList.printList())
