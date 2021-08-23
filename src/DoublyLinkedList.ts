@@ -1,4 +1,5 @@
 export class Node<T> {
+	public prev: Node<T> | null = null
 	public next: Node<T> | null = null
 	public constructor(public value: T) {}
 }
@@ -26,7 +27,7 @@ class LinkedList<T> implements ILinkedList<T> {
 			this.length++
 			return this
 		}
-
+		newNode.prev = this.tail
 		this.tail.next = newNode
 		this.tail = newNode
 		this.length++
@@ -41,6 +42,7 @@ class LinkedList<T> implements ILinkedList<T> {
 			return this
 		}
 		newNode.next = this.head
+		this.head.prev = newNode
 		this.head = newNode
 		this.length++
 		return this
@@ -88,15 +90,17 @@ const linkedList = new LinkedList()
 
 linkedList.append(2)
 linkedList.append(3)
-linkedList.prepend(1)
 linkedList.append(5)
+linkedList.prepend(1)
+
 console.log(linkedList)
 console.log(linkedList.printList())
-console.log(linkedList.traverseToIndex(2))
-linkedList.insert(2, 4)
-linkedList.insert(200, 6)
-console.log(linkedList)
-console.log(linkedList.printList())
-linkedList.delete(1)
-console.log(linkedList)
-console.log(linkedList.printList())
+console.log(linkedList.head.next)
+// console.log(linkedList.traverseToIndex(2))
+// linkedList.insert(2, 4)
+// linkedList.insert(200, 6)
+// console.log(linkedList)
+// console.log(linkedList.printList())
+// linkedList.delete(1)
+// console.log(linkedList)
+// console.log(linkedList.printList())
