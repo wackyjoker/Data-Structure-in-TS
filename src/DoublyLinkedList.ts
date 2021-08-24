@@ -15,7 +15,7 @@ interface IDoublyLinkedList<T> {
 }
 
 class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
-	private head: Node<T> | null = null
+	public head: Node<T> | null = null
 	private tail: Node<T> | null = null
 	public length: number = 0
 
@@ -118,3 +118,18 @@ console.log(doublyLinkedList.printList())
 // linkedList.delete(1)
 // console.log(linkedList)
 // console.log(linkedList.printList())
+
+function printLinkedList(obj: DoublyLinkedList<unknown>, next: string = "next"): null {
+	let headNode = obj.head
+
+	console.log(headNode)
+	while (headNode) {
+		console.log(headNode.next)
+		headNode = headNode.next
+		if (!headNode) break
+	}
+
+	console.log("the End")
+	return null
+}
+var res = printLinkedList(doublyLinkedList)
