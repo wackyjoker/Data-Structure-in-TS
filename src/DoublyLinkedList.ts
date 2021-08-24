@@ -4,16 +4,17 @@ export class Node<T> {
 	public constructor(public value: T) {}
 }
 
-interface ILinkedList<T> {
+interface IDoublyLinkedList<T> {
 	append(data: T): this
 	prepend(data: T): this
 	printList(): Array<T>
 	traverseToIndex(index: number): Node<T>
 	insert(index: number, data: T): this
 	delete(index: number): this
+	reverse(): this
 }
 
-class LinkedList<T> implements ILinkedList<T> {
+class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 	private head: Node<T> | null = null
 	private tail: Node<T> | null = null
 	public length: number = 0
@@ -86,17 +87,29 @@ class LinkedList<T> implements ILinkedList<T> {
 		this.length--
 		return this
 	}
+	public reverse() {
+		if (this.length < 2) return this
+		// let lead = this.head.next
+		// let temp = lead.next
+		// this.tail = this.head
+		// this.tail.next = null
+		// while(temp.next){
+		// 	lead.next = this.head
+		// 	this.head = lead
+
+		// }
+	}
 }
 
-const linkedList = new LinkedList()
+const doublyLinkedList = new DoublyLinkedList()
 
-linkedList.append(2)
-linkedList.append(3)
-linkedList.append(5)
-linkedList.prepend(1)
-linkedList.insert(2, 4)
-console.log(linkedList)
-console.log(linkedList.printList())
+doublyLinkedList.append(2)
+doublyLinkedList.append(3)
+doublyLinkedList.append(5)
+doublyLinkedList.prepend(1)
+doublyLinkedList.insert(2, 4)
+console.log(doublyLinkedList)
+console.log(doublyLinkedList.printList())
 // console.log(linkedList.traverseToIndex(2))
 
 // linkedList.insert(200, 6)
