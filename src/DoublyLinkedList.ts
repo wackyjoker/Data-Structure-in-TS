@@ -89,18 +89,18 @@ class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 	}
 	public reverse() {
 		if (this.length < 2) return this
-		// let lead = this.head.next
-		// let temp = lead.next
-		// this.tail = this.head
-		// this.tail.next = null
-		// while(temp.next){
-		// 	lead.next = this.head
-		// 	this.head = lead
 
-		// }
+		let newHead = this.tail
+		let newTail
+		let temp = this.tail.prev
+		newHead.prev = null
+		while (temp.prev) {
+			newHead.next = temp
+
+			temp = temp.prev
+		}
 	}
 }
-
 const doublyLinkedList = new DoublyLinkedList()
 
 doublyLinkedList.append(2)
@@ -119,7 +119,7 @@ console.log(doublyLinkedList.printList())
 // console.log(linkedList)
 // console.log(linkedList.printList())
 
-function printLinkedList(obj: DoublyLinkedList<unknown>, next: string = "next"): null {
+function printLinkedList(obj: any, next: string = "next"): null {
 	let headNode = obj.head
 
 	console.log(headNode)
