@@ -101,7 +101,7 @@ class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 		}
 	}
 }
-const doublyLinkedList = new DoublyLinkedList()
+const doublyLinkedList = new DoublyLinkedList<number>()
 
 doublyLinkedList.append(2)
 doublyLinkedList.append(3)
@@ -119,7 +119,10 @@ console.log(doublyLinkedList.printList())
 // console.log(linkedList)
 // console.log(linkedList.printList())
 
-function printLinkedList(obj: any, next: string = "next"): null {
+/*
+looping through each node to debug
+*/
+function printLinkedList(obj: DoublyLinkedList<number>, next: string = "next"): null {
 	let headNode = obj.head
 
 	console.log(headNode)
@@ -132,4 +135,4 @@ function printLinkedList(obj: any, next: string = "next"): null {
 	console.log("the End")
 	return null
 }
-var res = printLinkedList(doublyLinkedList)
+printLinkedList(doublyLinkedList)
