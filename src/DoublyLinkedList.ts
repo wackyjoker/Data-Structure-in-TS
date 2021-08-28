@@ -85,6 +85,7 @@ class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 		const current = this.traverseToIndex(index - 1)
 		const toBeDeleted = current.next
 		current.next = toBeDeleted.next
+		current.next.prev = current
 		this.length--
 		return this
 	}
@@ -106,7 +107,6 @@ class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 		this.tail = lead.next
 		this.tail.next = null
 		this.tail.prev = lead
-		console.log(this.head)
 		return this
 	}
 }
@@ -117,33 +117,28 @@ doublyLinkedList.append(3)
 doublyLinkedList.append(5)
 doublyLinkedList.prepend(1)
 doublyLinkedList.insert(2, 4)
-console.log(doublyLinkedList)
+console.log(doublyLinkedList.traverseToIndex(2))
+doublyLinkedList.insert(200, 6)
+
+doublyLinkedList.delete(1)
 console.log(doublyLinkedList.printList())
 doublyLinkedList.reverse()
 console.log(doublyLinkedList.printList())
-// console.log(linkedList.traverseToIndex(2))
-
-// linkedList.insert(200, 6)
-// console.log(linkedList)
-// console.log(linkedList.printList())
-// linkedList.delete(1)
-// console.log(linkedList)
-// console.log(linkedList.printList())
 
 /*
 looping through each node to debug
 */
-function printLinkedList(obj: DoublyLinkedList<number>, next: string = "next"): null {
-	let headNode = obj.head
+// function printLinkedList(obj: DoublyLinkedList<number>, next: string = "next"): null {
+// 	let headNode = obj.head
 
-	console.log(headNode)
-	while (headNode) {
-		console.log(headNode.next)
-		headNode = headNode.next
-		if (!headNode) break
-	}
+// 	console.log(headNode)
+// 	while (headNode) {
+// 		console.log(headNode.next)
+// 		headNode = headNode.next
+// 		if (!headNode) break
+// 	}
 
-	console.log("the End")
-	return null
-}
+// 	console.log("the End")
+// 	return null
+// }
 //printLinkedList(doublyLinkedList)
