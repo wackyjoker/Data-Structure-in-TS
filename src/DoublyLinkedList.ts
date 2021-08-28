@@ -77,6 +77,7 @@ class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 		current.next = newNode
 		newNode.prev = current
 		newNode.next = tempMemory
+		tempMemory.prev = newNode
 		this.length++
 		return this
 	}
@@ -91,14 +92,16 @@ class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 		if (this.length < 2) return this
 
 		let newHead = this.tail
-		let newTail
-		let temp = this.tail.prev
+		let temp = newHead.prev
 		newHead.prev = null
-		while (temp.prev) {
-			newHead.next = temp
 
-			temp = temp.prev
-		}
+		// while(){
+
+		// 	newHead.next =
+
+		// }
+
+		console.log(temp)
 	}
 }
 const doublyLinkedList = new DoublyLinkedList<number>()
@@ -110,6 +113,7 @@ doublyLinkedList.prepend(1)
 doublyLinkedList.insert(2, 4)
 console.log(doublyLinkedList)
 console.log(doublyLinkedList.printList())
+doublyLinkedList.reverse()
 // console.log(linkedList.traverseToIndex(2))
 
 // linkedList.insert(200, 6)
@@ -135,4 +139,4 @@ function printLinkedList(obj: DoublyLinkedList<number>, next: string = "next"): 
 	console.log("the End")
 	return null
 }
-printLinkedList(doublyLinkedList)
+//printLinkedList(doublyLinkedList)
